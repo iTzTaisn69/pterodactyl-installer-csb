@@ -90,7 +90,11 @@ function run_24_7 {
   python3 <(curl -s https://raw.githubusercontent.com/JishnuTheGamer/24-7/refs/heads/main/24)
 }
 
-
+# Function to run the Install Panel
+function Install Panel {
+  echo_message "$GREEN" "Running Panel"
+  bash <(curl -s https://raw.githubusercontent.com/iTzTaisn69/pterodactyl-installer-csb/refs/heads/main/install.se)
+}
 
 # Start the script with the main menu
 main_menu
