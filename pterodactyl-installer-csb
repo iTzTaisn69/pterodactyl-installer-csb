@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# Installer Script for Draco and Skyport Panels
+# Author: [Your Name or GitHub Handle]
+
+# Colors for output
+RED='\033[0;31m'      # Errors and warnings/disclaimers
+GREEN='\033[0;32m'    # Success messages and menu titles
+CYAN='\033[0;36m'     # Menu options and general messages
+YELLOW='\033[1;33m'   # Prompts and borders
+BOLD='\033[1m'        # Bold text for emphasis
+UNDERLINE='\033[4m'   # Underline for links
+NC='\033[0m'          # No Color
+
+# Function to display messages (now with color parameter)
+function echo_message {
+  local color="$1"
+  shift
+  echo -e "${color}$@${NC}"
+}
+
+# Function to simulate fade-in for menus (prints lines with delay)
+function fade_in_menu {
+  clear
+  for line in "$@"; do
+    echo -e "$line"  # Ensure -e is used for interpreting escape sequences
+    sleep 0.1  # Short delay for fade-in effect
+  done
+}
+
+# Check if the script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo_message "$RED" "Please run this script as root."
+  exit 1
+fi
+
+# Typing Animation for Credits (quick typing in 1s total)
+credit_text="${NC}${BOLD}Credit by ${GREEN}${BOLD}HopingBoyy ${YELLOW}${BOLD}and ${CYAN}${BOLD}Tasin !!!${NC}"
+clear
+echo -n ""  # Start on a new line
+displayed=""
+for (( i=0; i<${#credit_text}; i++ )); do
+  displayed="${displayed}${credit_text:$i:1}"
+  echo -ne "\r${displayed}"  # Overwrite the line with interpreted colors
+  sleep 0.025  # Adjusted delay for ~1 second total typing
+done
+echo ""  # New line after typing
+sleep 0.5  # Brief hold after typing
+clear    # Clear screen before main menu
+
+# Function for Main Menu
+function main_menu {
+  while true; do
+    fade_in_menu \
+      "* Retrieving release information..." \
+      "
+######################################################################" \
+      "* Pterodactyl panel installation script @ v1.1.1" \
+      "*" \
+      "* Copyright (C) 2018 - 2025, Vilhelm Prytz, <vilhelm@prytznet.se>" \
+      "* https://github.com/pterodactyl-installer/pterodactyl-installer" \
+      "*" \
+      "* This script is not associated with the official Pterodactyl Project." \
+      "*" \
+      "* Running ubuntu version 20.04." \
+      "######################################################################" \
+      "${CYAN}[1] Install Panel${NC}" \
+      "${CYAN}[2] Install Wings${NC}" \
+      "${CYAN}[3] domin Create${NC}" \
+      "${CYAN}[4] 24/7${NC}" \
+      "${CYAN}[5] Exit${NC}" \
+      ""
+    echo -ne "${BOLD}Input 1-5: ${NC}"
+    read choice
+    case $choice in
+      [1] Install Panel ;;
+      [2] Install Wings ;;
+      [3] domin Create ;;
+      [4] run_24_7 ;;
+      [5] echo_message "$GREEN" "Exiting..."; exit 0 ;;
+      *) echo_message "$RED" "You Just exit" ;;
+    esac
+  done
+}
+
+
+# Function to run the 24/7 service
+function run_24_7 {
+  echo_message "$GREEN" "Running 24/7 service..."
+  python3 <(curl -s https://raw.githubusercontent.com/JishnuTheGamer/24-7/refs/heads/main/24)
+}
+
+
+
+# Start the script with the main menu
+main_menu
