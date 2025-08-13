@@ -10,7 +10,8 @@ ascii_art="
 █▀▀▀ ──▀── ▀▀▀ ▀─▀▀ ▀▀▀▀ ▀▀▀─ ▀──▀ ▀▀▀ ──▀── ▄▄▄█ ▀▀▀
 
 "
-sudo apt update && apt install docker-compose -y && apt upgrade -y && mkdir pterodactyl && cd pterodactyl && mkdir panel && cd panel
+# step 1: install all
+sudo apt update && apt install docker-compose -y && apt upgrade -y && mkdir pterodactyl && cd pterodactyl && mkdir panel && cd panel && clear
 
 # Step 2: Create docker-compose.yml file
 cat <<EOF > docker-compose.yml
@@ -98,23 +99,18 @@ CYAN='\033[0;36m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
-# Clear the screen
+# Step 4: Clear the screen
 clear
-# Check if the script is run as root
-if [ "$EUID" -ne 0 ]; then
-  echo -e "${RED}Please run this script as root.${NC}"
-  exit 1
-fi
 
 echo -e "${CYAN}$ascii_art${NC}"
 
 
 echo "* Installing Dependencies"
 
-# Update package list and install dependencies
+# Step 5: Update package list and install dependencies
 
 mkdir -p ./data/{database,var,nginx,certs,logs}
 
-# addusers
+# Step 6: addusers
 
 docker-compose run --rm panel php artisan p:user:make
