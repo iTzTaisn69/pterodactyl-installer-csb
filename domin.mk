@@ -37,5 +37,9 @@ apt update && curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
   && echo "deb https://ngrok-agent.s3.amazonaws.com bookworm main" \
   | sudo tee /etc/apt/sources.list.d/ngrok.list \
   && sudo apt update \
-  && sudo apt install ngrok && ngrok config add-authtoken 2ydA4rZ4zjoGV2Mt9TnmMwtkupp_5fW7zp6M7WWtxdKyWFE8B && ngrok http http://localhost:8030
+  && sudo apt install ngrok
+
+ngrok config add-authtoken 2ydA4rZ4zjoGV2Mt9TnmMwtkupp_5fW7zp6M7WWtxdKyWFE8B
+
+ngrok http http://localhost:8030
 
