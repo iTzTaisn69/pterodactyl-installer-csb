@@ -10,10 +10,9 @@ ascii_art="
 █▀▀▀ ──▀── ▀▀▀ ▀─▀▀ ▀▀▀▀ ▀▀▀─ ▀──▀ ▀▀▀ ──▀── ▄▄▄█ ▀▀▀
 
 "
-# step 1: install all
+
 sudo apt update && apt install docker-compose -y && apt upgrade -y && mkdir pterodactyl && cd pterodactyl && mkdir panel && cd panel && clear
 
-# Step 2: Create docker-compose.yml file
 cat <<EOF > docker-compose.yml
 version: '3.8'
 
@@ -104,13 +103,8 @@ clear
 
 echo -e "${CYAN}$ascii_art${NC}"
 
-
 echo "* Installing Dependencies"
 
-# Step 5: Update package list and install dependencies
-
 mkdir -p ./data/{database,var,nginx,certs,logs}
-
-# Step 6: addusers
 
 docker-compose run --rm panel php artisan p:user:make
