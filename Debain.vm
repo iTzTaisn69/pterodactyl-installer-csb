@@ -1,0 +1,39 @@
+apt update && apt upgrade -y
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+clear
+
+echo -e "${CYAN}$ascii_art${NC}"
+
+# ASCII Art
+ascii_art="
+
+ 
+
+
+
+
+██████╗░███████╗██████╗░░█████╗░██╗███╗░░██╗
+██╔══██╗██╔════╝██╔══██╗██╔══██╗██║████╗░██║
+██║░░██║█████╗░░██████╦╝███████║██║██╔██╗██║
+██║░░██║██╔══╝░░██╔══██╗██╔══██║██║██║╚████║
+██████╔╝███████╗██████╦╝██║░░██║██║██║░╚███║
+╚═════╝░╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝╚═╝░░╚══╝
+
+"
+
+docker run -it --rm \
+  --name hopingboyz \
+  --device /dev/kvm \
+  -v $PWD/vmdata:/vmdata \
+  -e RAM=8000 \
+  -e CPU=4 \
+  -e DISK_SIZE=100G \
+  hopingboyz/debain12
