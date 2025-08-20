@@ -108,3 +108,5 @@ echo "* Installing Dependencies"
 mkdir -p ./data/{database,var,nginx,certs,logs}
 
 docker-compose run --rm panel php artisan p:user:make
+
+echo Made By iTzTasin69
